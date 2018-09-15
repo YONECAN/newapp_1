@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('./recom/dbconnect');
+// require('./recom/dbconnect');
 
 require '../vendor/autoload.php';
 \Cloudinary::config(array(
