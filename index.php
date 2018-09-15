@@ -67,7 +67,7 @@ if (!empty($_POST)) {
 <body>
     <div class="wrapper">
         <header class="header">
-            <a class="title" href="recomendation.php">Home</a>
+            <a class="title" href="./recom/recomendation.php">Home</a>
         </header>
         <header class="header">
         </header>
@@ -95,7 +95,7 @@ if (!empty($_POST)) {
 
                 </div><br>
                 <input type="submit" class="btn btn-primary" value="チャレンジ!!">
-                <a href="signin.php" style="float: right;padding-top: 6px;" class="text-success">
+                <a href="./recom/signin.php" style="float: right;padding-top: 6px;" class="text-success">
                     サインイン
                 </a>
             </form>
