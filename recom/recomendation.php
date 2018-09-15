@@ -4,11 +4,11 @@ var_dump($_SESSION['record']['id']);
 
 
 require '../vendor/autoload.php';
-\Cloudinary::config(array(
-    "cloud_name" => "hb2ekbyxa",
-    "api_key" => "935614219356682",
-    "api_secret" => "3tTB_g7_AP4j4hRkReEWhm9zHu0"
-));
+// \Cloudinary::config(array(
+//     "cloud_name" => "hb2ekbyxa",
+//     "api_key" => "935614219356682",
+//     "api_secret" => "3tTB_g7_AP4j4hRkReEWhm9zHu0"
+// ));
 
 echo  $_SESSION['recom']['name'];
         $_SESSION['recom']['Q1']='';
