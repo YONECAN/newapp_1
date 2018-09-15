@@ -2,7 +2,7 @@
 session_start();
 // require('./recom/dbconnect');
 
-require '../vendor/autoload.php';
+require './vendor/autoload.php';
 // \Cloudinary::config(array(
 //     "cloud_name" => "hb2ekbyxa",
 //     "api_key" => "935614219356682",
