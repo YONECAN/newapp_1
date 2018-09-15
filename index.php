@@ -1,3 +1,55 @@
+<?php
+session_start();
+require('./recom/dbconnect');
+
+require '../vendor/autoload.php';
+\Cloudinary::config(array(
+    "cloud_name" => "hb2ekbyxa",
+    "api_key" => "935614219356682",
+    "api_secret" => "3tTB_g7_AP4j4hRkReEWhm9zHu0"
+));
+
+$errors=array();
+
+if (!empty($_POST)) {
+    $password= $_POST['password'];
+    $name = $_POST['input_name'];
+    if ($name=='') {
+        $errors['name']='blank';
+    }
+    if ($password=='') {
+        $errors['pass']='blank';
+    }
+
+    if (empty($errors)) {
+        $_SESSION['recom']['name']=$_POST['input_name'];
+        $name=$_SESSION['recom']['name'];
+        $_SESSION['recom']['pass']=$_POST['password'];
+        $password=$_SESSION['recom']['pass'];
+        $sql = 'INSERT INTO users SET username=?,password=?';
+        $data = array($name,password_hash($password, PASSWORD_DEFAULT));
+        // $stmt = $dbh->prepare($sql);
+        // $stmt->execute($data);
+        $result=pg_query_params($sql,$data);
+
+        $sql='SELECT id FROM users WHERE username=?';
+        $data = array($name);
+        // $stmt = $dbh->prepare($sql);
+        // $stmt->execute($data);
+        $result=pg_query_params($sql,$data);
+        // $record = $stmt->fetch(PDO::FETCH_ASSOC);
+        $record=pg_fetch_array($result,NULL,PGSQL_ASSOC);
+        $_SESSION['recom']['id']=$record['id'];
+
+        header('LOCATION:signin.php');
+        // exit();
+        pg_close($dbh);
+    }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,12 +81,16 @@
                     <h3>
                         <label for="name">ユーザー名</label>
                         <input type="text" name="input_name" class="form-control" id="name" placeholder="cote de pablo">
-                        
+                        <?php if (isset($errors['name']) && $errors['name']=='blank') {?>
+                          <p class="text-danger">ユーザー名を入力してください</p>
+                        <?php } ?>
                     </h3>
                     <h3>
                         <label for="name">パスワード</label>
                         <input type="password" name="password" class="form-control" id="name" placeholder="4~16文字">
-                        
+                        <?php if (isset($errors['pass']) && $errors['pass']=='blank') {?>
+                          <p class="text-danger">パスワードを入力してください</p>
+                        <?php } ?>
                     </h3>
 
                 </div><br>
